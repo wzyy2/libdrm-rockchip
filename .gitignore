@@ -1,0 +1,6 @@
+*Makefile.in
+
+aclocal.m4
+/autom4te.cache/*
+.__autoconf_trace_data
+.elibtoolized
