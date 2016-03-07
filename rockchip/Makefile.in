@@ -128,7 +128,7 @@ am__installdirs = "$(DESTDIR)$(libdrm_rockchip_ladir)" \
 	"$(DESTDIR)$(libdrm_rockchipincludedir)"
 LTLIBRARIES = $(libdrm_rockchip_la_LTLIBRARIES)
 libdrm_rockchip_la_DEPENDENCIES = ../libdrm.la
-am_libdrm_rockchip_la_OBJECTS = rockchip_drm.lo
+am_libdrm_rockchip_la_OBJECTS = rockchip_drm.lo rockchip_rga.lo
 libdrm_rockchip_la_OBJECTS = $(am_libdrm_rockchip_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -362,10 +362,11 @@ libdrm_rockchip_ladir = $(libdir)
 libdrm_rockchip_la_LDFLAGS = -version-number 1:0:0 -no-undefined
 libdrm_rockchip_la_LIBADD = ../libdrm.la @PTHREADSTUBS_LIBS@
 libdrm_rockchip_la_SOURCES = \
-	rockchip_drm.c
+	rockchip_drm.c \
+	rockchip_rga.c
 
 libdrm_rockchipincludedir = ${includedir}/libdrm
-libdrm_rockchipinclude_HEADERS = rockchip_drmif.h rockchip_drm.h
+libdrm_rockchipinclude_HEADERS = rockchip_drmif.h rockchip_drm.h rockchip_rga.h
 pkgconfig_DATA = libdrm_rockchip.pc
 all: all-am
 
@@ -449,6 +450,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rockchip_drm.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rockchip_rga.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

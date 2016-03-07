@@ -16,6 +16,10 @@ if HAVE_TEGRA
 SUBDIRS += tegra
 endif
 
+if HAVE_ROCKCHIP
+SUBDIRS += rockchip
+endif
+
 if HAVE_LIBUDEV
 SUBDIRS += vbltest
 endif
