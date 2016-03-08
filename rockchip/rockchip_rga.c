@@ -608,6 +608,12 @@ int rga_multiple_transform(struct rga_context *ctx, struct rga_image *src,
 		return -EINVAL;
 	}
 
+	if (src_w < 32 || src_h < 34 || dst_w < 32 || dst_h < 34) {
+		fprintf(stderr, "invalid src/dst width or height.\n");
+		rga_reset(ctx);
+		return -EINVAL;
+	}
+
 	if (src_x + src_w > src->width)
 		src_w = src->width - src_x;
 	if (src_y + src_h > src->height)
@@ -689,8 +695,12 @@ int rga_multiple_transform(struct rga_context *ctx, struct rga_image *src,
 	 */
 	if (src_info.data.rot_mode == RGA_SRC_ROT_MODE_90_DEGREE ||
 	    src_info.data.rot_mode == RGA_SRC_ROT_MODE_270_DEGREE) {
-		if (dst_w == src_h)
-			src_h -= 8;
+		if (ctx->major == 0 || ctx->minor == 0) {
+			if (dst_w == src_h)
+				src_h -= 8;
+			if (abs(src_w - dst_h) < 16)
+				src_w -= 16;
+		}
 
 		scale_dst_h = dst_w;
 		scale_dst_w = dst_h;
