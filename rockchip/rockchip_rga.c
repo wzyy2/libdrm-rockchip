@@ -818,7 +818,7 @@ int rga_copy_with_rotate(struct rga_context *ctx, struct rga_image *src,
 			 unsigned int dst_y, unsigned int dst_w,
 			 unsigned int dst_h, unsigned int degree)
 {
-	if (degree != 0 || degree != 90 || degree != 180 || degree != 270) {
+	if (degree != 0 && degree != 90 && degree != 180 && degree != 270) {
 		fprintf(stderr, "invalid rotate degree %d.\n", degree);
 		return -EINVAL;
 	}
